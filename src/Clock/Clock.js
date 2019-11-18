@@ -7,14 +7,37 @@ import React, { Component } from 'react';
  */
 
 class Clock extends Component {
-	render() {
-		return (
-			<div>
-				<h1>Clock</h1>
-				The time is:
-			</div>
-		);
-	}
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: this.getTime()
+        };
+    }
+
+    componentDidMount() {
+        this.timer = setInterval(() => {
+            this.setState({date: this.getTime()});
+            console.log('hey');
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    getTime() {
+        return (new Date()).toString();
+    }
+
+    render() {
+        return (
+            <div >
+                <h1>Clock</h1>
+                <span>The time is: {this.state.date}</span>
+            </div>
+        );
+    }
 }
 
 export default Clock;

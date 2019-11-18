@@ -6,30 +6,48 @@ import Board from './Board/Board';
 import Counter from './Counter/Counter';
 import Car from './Car/Car';
 
-function App() {
-  return (
-    <div className="App">
-      <FoodPicker />
+class App extends React.Component {
 
-      <hr />
+  constructor(props) {
+      super(props);
+      this.state = {
+          isShown: true
+      }
+  }
 
-      <Clock />
+  toggle() {
+      this.setState({
+          isShown: !this.state.isShown
+      });
+  }
 
-      <hr />
+  render() {
+      return (
+          <div className="App">
+              <FoodPicker />
 
-      <Board />
+              <hr />
 
-      <hr />
+              <button onClick={this.toggle.bind(this)}>Toggle me</button>
+              {this.state.isShown ? <Clock /> : null}
 
-      <Counter />
+              <hr />
 
-      <hr />
+              <Board />
 
-      <Car />
+              <hr />
 
-      <hr />
-    </div>
-  );
+              <Counter />
+
+              <hr />
+
+              <Car />
+
+              <hr />
+          </div>
+      );
+  }
+
 }
 
 export default App;
